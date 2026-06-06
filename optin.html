@@ -4,13 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SMS Updates Opt-In | Burdenless AI</title>
-  <meta name="description" content="Opt in to receive SMS service updates from your Burdenless AI-powered trade business." />
+  <meta name="description" content="Optionally sign up to receive SMS service updates from your Burdenless AI-powered trade business. SMS consent is never required to receive service." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --bg: #0f1623;
       --bg-card: #151e2e;
@@ -25,7 +24,6 @@
       --success-border: rgba(34, 197, 94, 0.4);
       --success-text: #86efac;
     }
-
     body {
       background-color: var(--bg);
       color: var(--white);
@@ -34,7 +32,6 @@
       line-height: 1.7;
       min-height: 100vh;
     }
-
     nav {
       display: flex;
       align-items: center;
@@ -62,7 +59,6 @@
       color: var(--gold);
       font-style: normal;
     }
-
     .hero {
       padding: 56px 48px 32px;
       max-width: 640px;
@@ -79,13 +75,24 @@
       color: var(--muted);
       font-size: 15px;
     }
-
+    .optional-badge {
+      display: inline-block;
+      background: rgba(201,146,42,0.15);
+      border: 1px solid var(--border);
+      color: var(--gold-light);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
     main {
       max-width: 640px;
       margin: 0 auto;
       padding: 40px 48px 80px;
     }
-
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -93,7 +100,6 @@
       padding: 36px;
       margin-bottom: 24px;
     }
-
     .card h2 {
       font-size: 1rem;
       font-weight: 700;
@@ -102,7 +108,6 @@
       letter-spacing: 0.08em;
       margin-bottom: 20px;
     }
-
     .field {
       margin-bottom: 20px;
     }
@@ -127,21 +132,15 @@
       outline: none;
       transition: border-color 0.2s;
     }
-    .field input:focus {
-      border-color: var(--gold);
-    }
-    .field input::placeholder {
-      color: rgba(255,255,255,0.25);
-    }
-
+    .field input:focus { border-color: var(--gold); }
+    .field input::placeholder { color: rgba(255,255,255,0.25); }
     .consent-box {
       background: rgba(201, 146, 42, 0.06);
       border: 1px solid var(--border);
       border-radius: 10px;
       padding: 20px;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
-
     .consent-check {
       display: flex;
       gap: 14px;
@@ -161,10 +160,7 @@
       color: var(--muted);
       line-height: 1.6;
     }
-    .consent-check .consent-text strong {
-      color: var(--white);
-    }
-
+    .consent-check .consent-text strong { color: var(--white); }
     .disclosures {
       margin-top: 16px;
       padding-top: 16px;
@@ -173,17 +169,16 @@
       color: var(--muted);
       line-height: 1.7;
     }
-    .disclosures p {
-      margin-bottom: 6px;
-    }
-    .disclosures a {
-      color: var(--gold-light);
-      text-decoration: none;
-    }
+    .disclosures p { margin-bottom: 6px; }
+    .disclosures a { color: var(--gold-light); text-decoration: none; }
     .disclosures a:hover { text-decoration: underline; }
-
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
     .btn {
-      width: 100%;
+      flex: 1;
       background: var(--gold-btn);
       color: #0f1623;
       font-size: 15px;
@@ -193,12 +188,25 @@
       border-radius: 8px;
       padding: 15px 24px;
       cursor: pointer;
-      transition: background 0.2s, opacity 0.2s;
+      transition: background 0.2s;
       letter-spacing: 0.02em;
     }
     .btn:hover { background: var(--gold-light); }
-    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
-
+    .btn-secondary {
+      flex: 1;
+      background: transparent;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      border: 1px solid var(--border-input);
+      border-radius: 8px;
+      padding: 15px 24px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .btn-secondary:hover { color: var(--white); border-color: rgba(255,255,255,0.3); }
     .success {
       display: none;
       background: var(--success-bg);
@@ -206,21 +214,25 @@
       border-radius: 10px;
       padding: 24px;
       text-align: center;
-      margin-top: 20px;
+      margin-bottom: 20px;
     }
     .success h3 {
       color: var(--success-text);
       font-size: 1.1rem;
       margin-bottom: 8px;
     }
-    .success p {
-      color: var(--muted);
-      font-size: 14px;
+    .success p { color: var(--muted); font-size: 14px; }
+    .declined {
+      display: none;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-input);
+      border-radius: 10px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 20px;
     }
-
-    .info-section {
-      margin-top: 8px;
-    }
+    .declined p { color: var(--muted); font-size: 14px; }
+    .info-section { margin-top: 8px; }
     .info-section h3 {
       font-size: 0.85rem;
       font-weight: 700;
@@ -237,14 +249,8 @@
       font-size: 14px;
     }
     .info-row:last-child { border-bottom: none; }
-    .info-row .label {
-      color: var(--muted);
-      min-width: 140px;
-    }
-    .info-row .value {
-      color: var(--white);
-    }
-
+    .info-row .label { color: var(--muted); min-width: 140px; }
+    .info-row .value { color: var(--white); }
     footer {
       text-align: center;
       padding: 32px 48px;
@@ -252,17 +258,13 @@
       color: var(--muted);
       font-size: 13px;
     }
-    footer a {
-      color: var(--muted);
-      margin: 0 10px;
-      text-decoration: none;
-    }
+    footer a { color: var(--muted); margin: 0 10px; text-decoration: none; }
     footer a:hover { color: var(--gold); }
-
     @media (max-width: 640px) {
       nav, .hero, main, footer { padding-left: 20px; padding-right: 20px; }
       .hero h1 { font-size: 1.7rem; }
       .card { padding: 24px 20px; }
+      .btn-row { flex-direction: column; }
     }
   </style>
 </head>
@@ -275,25 +277,23 @@
   </nav>
 
   <div class="hero">
+    <div class="optional-badge">Optional</div>
     <h1>SMS Service Updates</h1>
-    <p>Opt in below to receive SMS notifications about your service appointments, job status, and follow-up reminders from your Burdenless AI-powered trade business.</p>
+    <p>You may choose to receive SMS notifications about your service appointments, job status, and follow-up reminders. <strong style="color:var(--white);">Signing up for SMS is completely optional and is never required to receive service.</strong></p>
   </div>
 
   <main>
 
     <div class="card">
       <h2>Your Information</h2>
-
       <div class="field">
         <label for="name">Full Name</label>
         <input type="text" id="name" placeholder="Jane Smith" autocomplete="name" />
       </div>
-
       <div class="field">
         <label for="phone">Mobile Phone Number</label>
         <input type="tel" id="phone" placeholder="(555) 555-5555" autocomplete="tel" />
       </div>
-
       <div class="field">
         <label for="business">Business Name</label>
         <input type="text" id="business" placeholder="Reliable HVAC" />
@@ -304,12 +304,11 @@
       <label class="consent-check">
         <input type="checkbox" id="consent" />
         <span class="consent-text">
-          <strong>Yes, I agree to receive SMS messages</strong> from the trade business identified above, powered by Burdenless AI. I understand I may receive appointment confirmations, technician arrival notices, job completion summaries, invoice totals, and follow-up reminders. Message frequency varies. <strong>Message and data rates may apply.</strong> I can reply <strong>STOP</strong> at any time to unsubscribe or <strong>HELP</strong> for assistance.
+          <strong>Yes, I voluntarily agree to receive SMS messages</strong> from the trade business identified above, powered by Burdenless AI. I understand I may receive appointment confirmations, technician arrival notices, job completion summaries, invoice totals, and follow-up reminders. Message frequency varies. <strong>Message and data rates may apply.</strong> I can reply <strong>STOP</strong> at any time to unsubscribe or <strong>HELP</strong> for assistance. <strong>This consent is not required to receive service.</strong>
         </span>
       </label>
-
       <div class="disclosures">
-        <p>By checking this box, you expressly consent to receive automated SMS messages at the mobile number provided. Consent is not a condition of purchase or service.</p>
+        <p>Consent is not a condition of purchase or receiving service. You may decline and still receive full service.</p>
         <p>No mobile information will be shared with third parties or affiliates for marketing or promotional purposes.</p>
         <p>
           View our <a href="https://jeffdonovan33.github.io/burdenless-policies/privacy.html" target="_blank">Privacy Policy</a>
@@ -318,11 +317,18 @@
       </div>
     </div>
 
-    <button class="btn" id="submitBtn" disabled onclick="handleSubmit()">Confirm SMS Opt-In</button>
+    <div class="btn-row">
+      <button class="btn" id="submitBtn" onclick="handleSubmit()">Yes, Sign Me Up for SMS</button>
+      <button class="btn-secondary" onclick="handleDecline()">No Thanks</button>
+    </div>
 
     <div class="success" id="successMsg">
       <h3>&#10003; You're opted in!</h3>
       <p>You'll receive SMS updates from your service provider. Reply STOP at any time to unsubscribe.</p>
+    </div>
+
+    <div class="declined" id="declinedMsg">
+      <p>No problem! You will not receive SMS messages. You will still receive full service.</p>
     </div>
 
     <div class="card info-section" style="margin-top:32px;">
@@ -352,6 +358,10 @@
         <span class="value">Reply HELP or email jeff@burdenlessai.com</span>
       </div>
       <div class="info-row">
+        <span class="label">SMS required?</span>
+        <span class="value">No. SMS consent is never required to receive service.</span>
+      </div>
+      <div class="info-row">
         <span class="label">Data sharing</span>
         <span class="value">No mobile data shared with third parties for marketing</span>
       </div>
@@ -369,22 +379,27 @@
   </footer>
 
   <script>
-    const consent = document.getElementById('consent');
-    const submitBtn = document.getElementById('submitBtn');
-
-    consent.addEventListener('change', function() {
-      submitBtn.disabled = !this.checked;
-    });
-
     function handleSubmit() {
       const name = document.getElementById('name').value.trim();
       const phone = document.getElementById('phone').value.trim();
+      const consent = document.getElementById('consent').checked;
       if (!name || !phone) {
-        alert('Please enter your name and phone number.');
+        alert('Please enter your name and phone number to opt in.');
         return;
       }
-      submitBtn.style.display = 'none';
+      if (!consent) {
+        alert('Please check the consent box to confirm you agree to receive SMS messages.');
+        return;
+      }
+      document.getElementById('submitBtn').style.display = 'none';
+      document.querySelector('.btn-secondary').style.display = 'none';
       document.getElementById('successMsg').style.display = 'block';
+    }
+
+    function handleDecline() {
+      document.getElementById('submitBtn').style.display = 'none';
+      document.querySelector('.btn-secondary').style.display = 'none';
+      document.getElementById('declinedMsg').style.display = 'block';
     }
   </script>
 
