@@ -1,407 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SMS Updates Opt-In | Burdenless AI</title>
-  <meta name="description" content="Optionally sign up to receive SMS service updates from your Burdenless AI-powered trade business. SMS consent is never required to receive service." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #0f1623;
-      --bg-card: #151e2e;
-      --gold: #c9922a;
-      --gold-light: #e0a83a;
-      --gold-btn: #d4993a;
-      --white: #ffffff;
-      --muted: #a0aec0;
-      --border: rgba(201, 146, 42, 0.2);
-      --border-input: rgba(255,255,255,0.12);
-      --success-bg: rgba(34, 197, 94, 0.1);
-      --success-border: rgba(34, 197, 94, 0.4);
-      --success-text: #86efac;
-    }
-    body {
-      background-color: var(--bg);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      line-height: 1.7;
-      min-height: 100vh;
-    }
-    nav {
-      display: flex;
-      align-items: center;
-      padding: 18px 48px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(15, 22, 35, 0.95);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-    .nav-logo span {
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      color: var(--white);
-      text-transform: uppercase;
-    }
-    .nav-logo span em {
-      color: var(--gold);
-      font-style: normal;
-    }
-    .hero {
-      padding: 56px 48px 32px;
-      max-width: 640px;
-      margin: 0 auto;
-      border-bottom: 1px solid var(--border);
-    }
-    .hero h1 {
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 8px;
-    }
-    .hero p {
-      color: var(--muted);
-      font-size: 15px;
-    }
-    .optional-badge {
-      display: inline-block;
-      background: rgba(201,146,42,0.15);
-      border: 1px solid var(--border);
-      color: var(--gold-light);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border-radius: 20px;
-      margin-bottom: 16px;
-    }
-    main {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 40px 48px 80px;
-    }
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 36px;
-      margin-bottom: 24px;
-    }
-    .card h2 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 20px;
-    }
-    .field {
-      margin-bottom: 20px;
-    }
-    .field label {
-      display: block;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 8px;
-    }
-    .field input {
-      width: 100%;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border-input);
-      border-radius: 8px;
-      padding: 12px 16px;
-      color: var(--white);
-      font-size: 15px;
-      font-family: 'Inter', sans-serif;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .field input:focus { border-color: var(--gold); }
-    .field input::placeholder { color: rgba(255,255,255,0.25); }
-    .consent-box {
-      background: rgba(201, 146, 42, 0.06);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 16px;
-    }
-    .consent-check {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      cursor: pointer;
-    }
-    .consent-check input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      min-width: 20px;
-      margin-top: 2px;
-      accent-color: var(--gold);
-      cursor: pointer;
-    }
-    .consent-check .consent-text {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-    .consent-check .consent-text strong { color: var(--white); }
-    .disclosures {
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-    .disclosures p { margin-bottom: 6px; }
-    .disclosures a { color: var(--gold-light); text-decoration: none; }
-    .disclosures a:hover { text-decoration: underline; }
-    .btn-row {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-    .btn {
-      flex: 1;
-      background: var(--gold-btn);
-      color: #0f1623;
-      font-size: 15px;
-      font-weight: 700;
-      font-family: 'Inter', sans-serif;
-      border: none;
-      border-radius: 8px;
-      padding: 15px 24px;
-      cursor: pointer;
-      transition: background 0.2s;
-      letter-spacing: 0.02em;
-    }
-    .btn:hover { background: var(--gold-light); }
-    .btn-secondary {
-      flex: 1;
-      background: transparent;
-      color: var(--muted);
-      font-size: 15px;
-      font-weight: 600;
-      font-family: 'Inter', sans-serif;
-      border: 1px solid var(--border-input);
-      border-radius: 8px;
-      padding: 15px 24px;
-      cursor: pointer;
-      transition: color 0.2s, border-color 0.2s;
-      letter-spacing: 0.02em;
-    }
-    .btn-secondary:hover { color: var(--white); border-color: rgba(255,255,255,0.3); }
-    .success {
-      display: none;
-      background: var(--success-bg);
-      border: 1px solid var(--success-border);
-      border-radius: 10px;
-      padding: 24px;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .success h3 {
-      color: var(--success-text);
-      font-size: 1.1rem;
-      margin-bottom: 8px;
-    }
-    .success p { color: var(--muted); font-size: 14px; }
-    .declined {
-      display: none;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border-input);
-      border-radius: 10px;
-      padding: 24px;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .declined p { color: var(--muted); font-size: 14px; }
-    .info-section { margin-top: 8px; }
-    .info-section h3 {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 12px;
-    }
-    .info-row {
-      display: flex;
-      gap: 12px;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      font-size: 14px;
-    }
-    .info-row:last-child { border-bottom: none; }
-    .info-row .label { color: var(--muted); min-width: 140px; }
-    .info-row .value { color: var(--white); }
-    footer {
-      text-align: center;
-      padding: 32px 48px;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 13px;
-    }
-    footer a { color: var(--muted); margin: 0 10px; text-decoration: none; }
-    footer a:hover { color: var(--gold); }
-    @media (max-width: 640px) {
-      nav, .hero, main, footer { padding-left: 20px; padding-right: 20px; }
-      .hero h1 { font-size: 1.7rem; }
-      .card { padding: 24px 20px; }
-      .btn-row { flex-direction: column; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sign up for SMS service updates from your home service provider, powered by Burdenless AI.">
+<title>SMS Opt-In | Burdenless AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,600;0,700;1,700&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#1C2B4A;--cream:#FAF6EF;--amber:#E8A33D;--ink:#2A3346;--rule:#E3DCCE;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--cream);color:var(--ink);font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px 64px;}
+  header{padding:28px 0;border-bottom:3px solid var(--navy);margin-bottom:40px;}
+  .wordmark{font-family:"Zilla Slab",serif;font-weight:700;font-size:22px;letter-spacing:.06em;color:var(--navy);text-decoration:none;}
+  .wordmark em{color:var(--amber);font-style:italic;}
+  h1{font-family:"Zilla Slab",serif;font-weight:700;font-size:40px;color:var(--navy);line-height:1.15;margin-bottom:8px;}
+  .sub{color:#6B7280;margin-bottom:32px;}
+  form{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:28px;}
+  label{display:block;font-weight:600;color:var(--navy);margin:18px 0 6px;font-size:15px;}
+  label:first-of-type{margin-top:0;}
+  input[type=text],input[type=tel]{width:100%;padding:12px 14px;border:1px solid var(--rule);border-radius:6px;font:inherit;background:var(--cream);}
+  input:focus{outline:2px solid var(--amber);outline-offset:1px;}
+  .consent{display:flex;gap:12px;align-items:flex-start;margin:24px 0;padding:16px;background:var(--cream);border-left:4px solid var(--amber);border-radius:0 6px 6px 0;}
+  .consent input{margin-top:5px;width:18px;height:18px;flex-shrink:0;}
+  .consent span{font-size:15px;line-height:1.55;}
+  button{font-family:"Zilla Slab",serif;font-weight:700;font-size:18px;background:var(--navy);color:var(--cream);border:none;border-radius:6px;padding:14px 28px;cursor:pointer;width:100%;}
+  button:hover{background:#27395f;}
+  button:disabled{background:#9AA3B5;cursor:not-allowed;}
+  .disclosure{font-size:14px;color:#6B7280;margin-top:24px;line-height:1.6;}
+  .disclosure strong{color:var(--navy);}
+  a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--amber);text-underline-offset:3px;}
+  .msg{display:none;margin-top:16px;padding:14px 16px;border-radius:6px;font-size:15px;}
+  .msg.ok{display:block;background:#EAF4EA;border:1px solid #BBD8BB;color:#2B5E2B;}
+  .msg.err{display:block;background:#FBEDEA;border:1px solid #E8C2BA;color:#8A3B2B;}
+  footer{margin-top:56px;padding-top:20px;border-top:3px solid var(--navy);font-size:15px;color:#6B7280;}
+  footer nav{margin-bottom:8px;}
+  footer nav a{margin-right:18px;}
+</style>
 </head>
 <body>
+<div class="wrap">
+<header><a class="wordmark" href="optin.html">BURDENLESS <em>AI</em></a></header>
 
-  <nav>
-    <a href="https://burdenlessai.com" class="nav-logo">
-      <span>BURDENLESS <em>AI</em></span>
-    </a>
-  </nav>
+<h1>Text Message Opt-In</h1>
+<p class="sub">Sign up to receive service updates by text from your home service provider, powered by Burdenless AI.</p>
 
-  <div class="hero">
-    <div class="optional-badge">Optional</div>
-    <h1>SMS Service Updates</h1>
-    <p>You may choose to receive SMS notifications about your service appointments, job status, and follow-up reminders. <strong style="color:var(--white);">Signing up for SMS is completely optional and is never required to receive service.</strong></p>
+<form id="optinForm" novalidate>
+  <label for="name">Full name</label>
+  <input type="text" id="name" name="name" autocomplete="name" required>
+
+  <label for="phone">Mobile phone number</label>
+  <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(555) 555-5555" required>
+
+  <label for="business">Your service provider (optional)</label>
+  <input type="text" id="business" name="business" placeholder="e.g. Reliable HVAC">
+
+  <div class="consent">
+    <input type="checkbox" id="consent" name="consent">
+    <span><strong>I agree to receive service notification texts</strong> (appointment confirmations, job updates, invoices, and service reminders) from my service provider via Burdenless AI. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to cancel, HELP for help. <strong>Consent is not a condition of any purchase or service.</strong></span>
   </div>
 
-  <main>
+  <button type="submit" id="submitBtn">Sign up for texts</button>
 
-    <div class="card">
-      <h2>Your Information</h2>
-      <div class="field">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" placeholder="Jane Smith" autocomplete="name" />
-      </div>
-      <div class="field">
-        <label for="phone">Mobile Phone Number</label>
-        <input type="tel" id="phone" placeholder="(555) 555-5555" autocomplete="tel" />
-      </div>
-      <div class="field">
-        <label for="business">Business Name</label>
-        <input type="text" id="business" placeholder="Reliable HVAC" />
-      </div>
-    </div>
+  <div class="msg ok" id="okMsg">You're signed up. You'll receive a confirmation text shortly. Reply STOP at any time to unsubscribe.</div>
+  <div class="msg err" id="errMsg">Something went wrong sending your signup. Please try again, or email <a href="mailto:jeff@burdenlessai.com">jeff@burdenlessai.com</a>.</div>
+</form>
 
-    <div class="consent-box">
-      <label class="consent-check">
-        <input type="checkbox" id="consent" />
-        <span class="consent-text">
-          <strong>Yes, I voluntarily agree to receive SMS messages</strong> from the trade business identified above, powered by Burdenless AI. I understand I may receive appointment confirmations, technician arrival notices, job completion summaries, invoice totals, and follow-up reminders. Message frequency varies. <strong>Message and data rates may apply.</strong> I can reply <strong>STOP</strong> at any time to unsubscribe or <strong>HELP</strong> for assistance. <strong>This consent is not required to receive service.</strong>
-        </span>
-      </label>
-      <div class="disclosures">
-        <p>Consent is not a condition of purchase or receiving service. You may decline and still receive full service.</p>
-        <p>No mobile information will be shared with third parties or affiliates for marketing or promotional purposes.</p>
-        <p>
-          View our <a href="https://jeffdonovan33.github.io/burdenless-policies/privacy.html" target="_blank">Privacy Policy</a>
-          and <a href="https://jeffdonovan33.github.io/burdenless-policies/terms.html" target="_blank">Terms of Service</a>.
-        </p>
-      </div>
-    </div>
+<p class="disclosure">By signing up you agree to our <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. You can unsubscribe at any time by replying <strong>STOP</strong> to any message. For assistance, reply <strong>HELP</strong> or email <a href="mailto:jeff@burdenlessai.com">jeff@burdenlessai.com</a>.</p>
 
-    <div class="btn-row">
-      <button class="btn" id="submitBtn" onclick="handleSubmit()">Yes, Sign Me Up for SMS</button>
-      <button class="btn-secondary" onclick="handleDecline()">No Thanks</button>
-    </div>
+<footer>
+<nav>
+<a href="privacy.html">Privacy Policy</a>
+<a href="terms.html">Terms of Service</a>
+<a href="optin.html">SMS Opt-In</a>
+<a href="mailto:jeff@burdenlessai.com">Contact</a>
+</nav>
+<p>&copy; 2026 Burdenless AI. All rights reserved.</p>
+</footer>
+</div>
 
-    <div class="success" id="successMsg">
-      <h3>&#10003; You're opted in!</h3>
-      <p>You'll receive SMS updates from your service provider. Reply STOP at any time to unsubscribe.</p>
-    </div>
+<script>
+// REPLACE with your Make "SMS Opt-In" webhook URL before publishing
+var WEBHOOK_URL = "https://hook.us2.make.com/REPLACE_WITH_YOUR_OPTIN_WEBHOOK";
 
-    <div class="declined" id="declinedMsg">
-      <p>No problem! You will not receive SMS messages. You will still receive full service.</p>
-    </div>
+document.getElementById("optinForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  var name = document.getElementById("name").value.trim();
+  var phone = document.getElementById("phone").value.trim();
+  var business = document.getElementById("business").value.trim();
+  var consent = document.getElementById("consent").checked;
+  var ok = document.getElementById("okMsg");
+  var err = document.getElementById("errMsg");
+  ok.classList.remove("ok"); err.classList.remove("err");
+  ok.style.display = "none"; err.style.display = "none";
 
-    <div class="card info-section" style="margin-top:32px;">
-      <h3>Program Details</h3>
-      <div class="info-row">
-        <span class="label">Program name</span>
-        <span class="value">Burdenless AI Service Notifications</span>
-      </div>
-      <div class="info-row">
-        <span class="label">Message types</span>
-        <span class="value">Appointment confirmations, job updates, invoices, follow-ups</span>
-      </div>
-      <div class="info-row">
-        <span class="label">Message frequency</span>
-        <span class="value">Varies based on service activity</span>
-      </div>
-      <div class="info-row">
-        <span class="label">Cost</span>
-        <span class="value">Message and data rates may apply</span>
-      </div>
-      <div class="info-row">
-        <span class="label">To opt out</span>
-        <span class="value">Reply STOP to any message</span>
-      </div>
-      <div class="info-row">
-        <span class="label">For help</span>
-        <span class="value">Reply HELP or email jeff@burdenlessai.com</span>
-      </div>
-      <div class="info-row">
-        <span class="label">SMS required?</span>
-        <span class="value">No. SMS consent is never required to receive service.</span>
-      </div>
-      <div class="info-row">
-        <span class="label">Data sharing</span>
-        <span class="value">No mobile data shared with third parties for marketing</span>
-      </div>
-    </div>
+  if(!name || !phone){ err.textContent = "Please enter your name and mobile number."; err.className = "msg err"; return; }
+  if(!consent){ err.textContent = "Please check the consent box to sign up for texts. Signing up is optional and not required to receive service."; err.className = "msg err"; return; }
 
-  </main>
+  var btn = document.getElementById("submitBtn");
+  btn.disabled = true; btn.textContent = "Signing up...";
 
-  <footer>
-    <div>
-      <a href="https://jeffdonovan33.github.io/burdenless-policies/privacy.html">Privacy Policy</a>
-      <a href="https://jeffdonovan33.github.io/burdenless-policies/terms.html">Terms of Service</a>
-      <a href="https://burdenlessai.com/contact">Contact</a>
-    </div>
-    <p style="margin-top:10px;">&copy; 2026 Burdenless AI. All rights reserved.</p>
-  </footer>
-
-  <script>
-    function handleSubmit() {
-      const name = document.getElementById('name').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const consent = document.getElementById('consent').checked;
-      if (!name || !phone) {
-        alert('Please enter your name and phone number to opt in.');
-        return;
-      }
-      if (!consent) {
-        alert('Please check the consent box to confirm you agree to receive SMS messages.');
-        return;
-      }
-      document.getElementById('submitBtn').style.display = 'none';
-      document.querySelector('.btn-secondary').style.display = 'none';
-      document.getElementById('successMsg').style.display = 'block';
-    }
-
-    function handleDecline() {
-      document.getElementById('submitBtn').style.display = 'none';
-      document.querySelector('.btn-secondary').style.display = 'none';
-      document.getElementById('declinedMsg').style.display = 'block';
-    }
-  </script>
-
+  fetch(WEBHOOK_URL, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      name: name,
+      phone: phone,
+      business: business,
+      consent: true,
+      consent_text: document.querySelector(".consent span").innerText,
+      source: "optin.html",
+      timestamp: new Date().toISOString()
+    })
+  }).then(function(r){
+    if(!r.ok) throw new Error("Request failed");
+    ok.className = "msg ok";
+    document.getElementById("optinForm").reset();
+  }).catch(function(){
+    err.textContent = "Something went wrong sending your signup. Please try again, or email jeff@burdenlessai.com.";
+    err.className = "msg err";
+  }).finally(function(){
+    btn.disabled = false; btn.textContent = "Sign up for texts";
+  });
+});
+</script>
 </body>
 </html>
